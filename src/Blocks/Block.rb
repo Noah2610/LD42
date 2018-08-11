@@ -10,5 +10,9 @@ module Blocks
     def is_safe?
       return !!@safe
     end
+
+    def is_unsafe?
+      return !is_safe?
+    end
   end
 end

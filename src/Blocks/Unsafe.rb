@@ -1,5 +1,5 @@
 module Blocks
-  class Spike < Block
+  class Unsafe < Block
     def setup
       super
       @safe = false

@@ -20,6 +20,9 @@ player:
   size:
     width:  16
     height: 24
+  # NOTE: The Player MUST have a centered origin (both axes),
+  #       otherwise its #is_touching_* methods do not work.
+  #       (Write a feature for the framework to avoid this in the future)
   origin:
     x: :center
     y: :center
@@ -40,18 +43,24 @@ player:
   max_velocity:
     x: 200
   velocity_decay:
-    x: 20
+    x: 750
   speed:
-    x: 20
-    y: 200
+    x: 600  # Uses Deltatime
+    y: 200  # Does NOT use Deltatime
   quick_turn_around: true
-  gravity_force: 20
-  # WARNING: If hover_jump_speed is above or equal to gravity_force,
-  # then the jump is stronger than gravity and the player can moon-jump.
-  hover_jump_speed:               18
+  gravity_force: 1100
+  # WARNING: If hover_jump_speed is too high, it might exceed the gravity's velocity decrease.
+  # When this happens the jump is stronger than gravity and the player can moon-jump.
+  hover_jump_speed:               850
   hover_jump_threshold:           100  # Only apply hover_jump_speed if velocity is larger (faster) than this
   jump_standing_on_block_padding: 4
 
 block:
   file: 'block.png'
+
+safe_block:
+  file: 'safe_block.png'
+
+unsafe_block:
+  file: 'unsafe_block.png'
 ...
