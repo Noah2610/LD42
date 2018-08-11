@@ -1,27 +1,16 @@
 class Game < AdventureRL::Window
   def setup settings
-    setup_buttons_event_handler settings.get(:buttons)
-    setup_player settings.get(:player)
+    @settings = settings
+    setup_buttons_event_handler @settings.get(:buttons)
+    setup_player @settings.get(:player)
 
-    block_settings        = settings.get(:block)
-    safe_block_settings   = block_settings.merge(settings.get(:safe_block))
-    safe_block_settings.merge!(
-      file: DIR[:images].join(safe_block_settings[:file]),
-      position: {
-        x: get_center(:x),
-        y: get_size(:height) * 0.75
-      }
-    )
-    unsafe_block_settings = block_settings.merge(settings.get(:unsafe_block))
-    unsafe_block_settings.merge!(
-      file: DIR[:images].join(unsafe_block_settings[:file]),
-      position: {
-        x: get_center(:x),
-        y: get_size(:height) * 0.75
-      }
-    )
+    load_level DIR[:levels].join('dev')
+    add @level
+    @level.play
+    @player.add_to_solids_manager @level.get_solids_manager
 
     # TODO: tmp
+=begin
     @blocks = [
       Blocks::Safe.new(safe_block_settings.merge(
         position: {
@@ -33,7 +22,7 @@ class Game < AdventureRL::Window
           height: 16
         }
       )),
-      50.times.map do
+      30.times.map do
         next Blocks::Safe.new(safe_block_settings.merge(
           position: {
             x: (get_side(:left) .. get_side(:right)).sample,
@@ -45,7 +34,7 @@ class Game < AdventureRL::Window
           }
         ))
       end,
-      20.times.map do
+      10.times.map do
         next Blocks::Unsafe.new(unsafe_block_settings.merge(
           position: {
             x: (get_side(:left) .. get_side(:right)).sample,
@@ -61,12 +50,29 @@ class Game < AdventureRL::Window
     @blocks.each do |block|
       add block
     end
+=end
 
     @timer = AdventureRL::TimingHandler.new
-    @timer.every seconds: 2 do
+    @timer.every seconds: 0.5 do
       puts Gosu.fps
     end
+    #@timer.every seconds: 0.1, method: method(:move_blocks)
     add @timer
+  end
+
+  def move_blocks
+    @blocks.each do |block|
+      dir = {
+        x: ((rand(2) == 0) ? 1 : -1),
+        y: ((rand(2) == 0) ? 1 : -1),
+      }
+      block.move_by(
+        x: (rand(1 .. 20) * dir[:x]),
+        y: (rand(1 .. 20) * dir[:y])
+        #x: (20 * dir[:x]),
+        #y: (20 * dir[:y])
+      )
+    end
   end
 
   def on_button_down btn
@@ -78,6 +84,15 @@ class Game < AdventureRL::Window
   end
 
   private
+
+    def load_level directory
+      level_settings = @settings.get(:level).merge(
+        directory: directory,
+        position:  get_corner(:right, :top),
+        size:      get_size
+      )
+      @level = Level.new level_settings
+    end
 
     def setup_buttons_event_handler settings = {}
       @buttons_event_handler = AdventureRL::EventHandlers::Buttons.new settings

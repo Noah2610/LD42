@@ -1,6 +1,7 @@
 ---
-caption: 'LD42 Jam Game! (Placeholder title, CHANGE THIS!!!)'
-fps:     60
+caption:            'LD42 Jam Game! (Placeholder title, CHANGE THIS!!!)'
+fps:                60
+has_solids_manager: false
 size:
   width:  960
   height: 540
@@ -15,8 +16,9 @@ player:
     - 'player1.png'
     - 'player2.png'
     - 'player3.png'
-  intervals: 0.25
-  z_index:   10
+  intervals:                  0.25
+  z_index:                    10
+  precision_over_performance: true
   size:
     width:  16
     height: 24
@@ -28,6 +30,8 @@ player:
     y: :center
   buttons:
     pressable_buttons:
+      test:
+        - b  # TODO
       move_left:
         - a
         - left
@@ -39,11 +43,15 @@ player:
       jump:
         - w
         - space
+        - up
         - k
   max_velocity:
     x: 200
   velocity_decay:
     x: 750
+  base_velocity:
+    x: 50
+    y: 0
   speed:
     x: 600  # Uses Deltatime
     y: 200  # Does NOT use Deltatime
@@ -56,11 +64,29 @@ player:
   jump_standing_on_block_padding: 4
 
 block:
-  file: 'block.png'
+  files:     'block.png'
+  intervals: 0.5
 
 safe_block:
-  file: 'safe_block.png'
+  files:     'safe_block.png'
+  intervals: 0.5
 
 unsafe_block:
-  file: 'unsafe_block.png'
+  files:     'unsafe_block.png'
+  intervals: 0.5
+
+level:
+  has_solids_manager: true
+  origin:
+    x: :left
+    y: :top
+
+section:
+  move_direction:
+    x: -1
+    y:  0
+  # move_speed uses Deltatime
+  move_speed:
+    x: 50
+    y: 0
 ...

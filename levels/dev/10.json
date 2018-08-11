@@ -1,0 +1,56 @@
+{
+  "blocks": [
+    {
+      "class": "Safe",
+      "files": "safe_block.png",
+      "intervals": 0.5,
+      "position": {
+        "x": 128,
+        "y": 64
+      },
+      "size": {
+        "width":  64,
+        "height": 16
+      }
+    },
+    {
+      "class": "Safe",
+      "files": "safe_block.png",
+      "intervals": 0.5,
+      "position": {
+        "x": 512,
+        "y": 128
+      },
+      "size": {
+        "width":  128,
+        "height": 32
+      }
+    },
+    {
+      "class": "Safe",
+      "files": "safe_block.png",
+      "intervals": 0.5,
+      "position": {
+        "x": 256,
+        "y": 128
+      },
+      "size": {
+        "width":  64,
+        "height": 512
+      }
+    },
+    {
+      "class": "Unsafe",
+      "files": "unsafe_block.png",
+      "intervals": 0.5,
+      "position": {
+        "x": 256,
+        "y": 128
+      },
+      "size": {
+        "width":  128,
+        "height": 64
+      }
+    }
+  ]
+}

@@ -15,10 +15,13 @@ DIR = {
   assets:   ROOT.join('assets'),
   images:   ROOT.join('assets/images'),
   audio:    ROOT.join('assets/audio'),
-  settings: ROOT.join('settings.yml')
+  settings: ROOT.join('settings.yml'),
+  levels:   ROOT.join('levels')
 }
+
+SETTINGS = AdventureRL::Settings.new(DIR[:settings])
 
 require DIR[:src].join('misc/require_files')
 
-GAME = Game.new AdventureRL::Settings.new(DIR[:settings])
+GAME = Game.new SETTINGS
 GAME.show

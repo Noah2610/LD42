@@ -22,6 +22,12 @@ class Player < AdventureRL::Animation
   end
 
   def on_button_press btn, mod
+    # TODO
+    if (btn == :test)
+      set_velocity y: 0
+      return
+    end
+
     if (has_method? btn)
       meth = method(btn)
       if (meth.arity == 1)
@@ -110,7 +116,7 @@ class Player < AdventureRL::Animation
       previous_size = get_size.dup
       set_size width: (get_size(:width) + (padding * 2)), height: (get_size(:height) + (padding * 2))
       standing_on = get_colliding_objects
-      set_size     previous_size
+      set_size previous_size
       safe_blocks = standing_on.select &:is_safe?
       return (safe_blocks.any? ? safe_blocks : false)
     end
@@ -119,7 +125,7 @@ class Player < AdventureRL::Animation
       previous_size = get_size.dup
       set_size width: (get_size(:width) + (padding * 2)), height: (get_size(:height) + (padding * 2))
       standing_on = get_colliding_objects
-      set_size     previous_size
+      set_size previous_size
       unsafe_blocks = standing_on.select &:is_unsafe?
       return (unsafe_blocks.any? ? unsafe_blocks : false)
     end
