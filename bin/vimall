@@ -1,0 +1,5 @@
+#!/bin/bash
+IFS=$'\n'
+files=('./README.md' './settings.yml')
+files_find=($( find . -iname '*.rb' ))
+vim ${files[@]} ${files_find[@]}

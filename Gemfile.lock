@@ -1,0 +1,21 @@
+PATH
+  remote: ../AdventureRL
+  specs:
+    AdventureRL (0.0.0)
+      gosu (~> 0.13.3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    byebug (10.0.2)
+    gosu (0.13.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  AdventureRL!
+  byebug
+
+BUNDLED WITH
+   1.16.3

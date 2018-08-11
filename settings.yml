@@ -1,0 +1,57 @@
+---
+caption: 'LD42 Jam Game! (Placeholder title, CHANGE THIS!!!)'
+fps:     60
+size:
+  width:  960
+  height: 540
+buttons:
+  pressable_buttons:
+    quit:
+      - 'q'
+      - 'escape'
+
+player:
+  files:
+    - 'player1.png'
+    - 'player2.png'
+    - 'player3.png'
+  intervals: 0.25
+  z_index:   10
+  size:
+    width:  16
+    height: 24
+  origin:
+    x: :center
+    y: :center
+  buttons:
+    pressable_buttons:
+      move_left:
+        - a
+        - left
+        - h
+      move_right:
+        - d
+        - right
+        - l
+      jump:
+        - w
+        - space
+        - k
+  max_velocity:
+    x: 200
+  velocity_decay:
+    x: 20
+  speed:
+    x: 20
+    y: 200
+  quick_turn_around: true
+  gravity_force: 20
+  # WARNING: If hover_jump_speed is above or equal to gravity_force,
+  # then the jump is stronger than gravity and the player can moon-jump.
+  hover_jump_speed:               18
+  hover_jump_threshold:           100  # Only apply hover_jump_speed if velocity is larger (faster) than this
+  jump_standing_on_block_padding: 4
+
+block:
+  file: 'block.png'
+...
