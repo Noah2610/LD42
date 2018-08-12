@@ -6,7 +6,7 @@ Bundler.setup
 require 'byebug'
 
 require 'pathname'
-require 'AdventureRL'
+require 'adventure_rl'
 
 ROOT = Pathname.new(__FILE__).realpath.dirname
 

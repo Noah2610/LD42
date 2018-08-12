@@ -1,7 +1,7 @@
 PATH
   remote: ../AdventureRL
   specs:
-    AdventureRL (0.0.0)
+    adventure_rl (0.0.0)
       gosu (~> 0.13.3)
 
 GEM
@@ -14,7 +14,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  AdventureRL!
+  adventure_rl!
   byebug
 
 BUNDLED WITH
