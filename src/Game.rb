@@ -14,9 +14,9 @@ class Game < AdventureRL::Window
     @player.add_to_solids_manager @level.get_solids_manager
 
     @timer = AdventureRL::TimingHandler.new
-    @timer.every seconds: 0.5 do
-      puts Gosu.fps
-    end
+    #@timer.every seconds: 0.5 do
+    #  puts Gosu.fps
+    #end
     add @timer
   end
 

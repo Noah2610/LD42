@@ -21,9 +21,9 @@ class Level < AdventureRL::Layer
     @last_loaded_section_index += 1
     return                                                unless (@last_loaded_section_index < @sections.size)
     new_section = @sections[@last_loaded_section_index]
-    puts "LAST: #{last_section.get_id}"  if (last_section)
-    puts "LOAD: #{new_section.get_id}"
-    puts "EQUAL: #{new_section == last_section}"
+    #puts "LAST: #{last_section.get_id}"  if (last_section)
+    #puts "LOAD: #{new_section.get_id}"
+    #puts "EQUAL: #{new_section == last_section}"
     new_section.set_position((last_section || self).get_corner(:right, :top))  # NOTE: Adjust if Sections should move into different direction
     add new_section, new_section.get_id
     #end
@@ -33,7 +33,10 @@ class Level < AdventureRL::Layer
   end
 
   def remove_section section
-    remove_object section.get_id
+    #remove_object section.get_id
+    section.get_objects.each do |object|
+      object.make_static  if (object.is_a? Section)
+    end
   end
 
   def move_sections

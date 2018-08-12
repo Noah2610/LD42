@@ -21,7 +21,9 @@ player:
   z_index:                    10
   precision_over_performance: :high
   solid_tag:                  :player
-  solid_tag_collides_with:    :block
+  solid_tag_collides_with:
+    - :block
+    - :block_stuck
   size:
     width:  16
     height: 24
@@ -73,14 +75,20 @@ block:
   files:                      'block.png'
   intervals:                  0.5
   solid_tag:                  :block
-  solid_tag_collides_with:    :player
+  solid_tag_collides_with:
+    - :player
+    - :block_stuck
 
 safe_block:
   files:     'safe_block.png'
   intervals: 0.5
 
 unsafe_block:
-  files:     'unsafe_block.png'
+  files:
+    - 'star_1.png'
+    - 'star_2.png'
+    - 'star_3.png'
+    - 'star_4.png'
   intervals: 0.5
 
 level:
