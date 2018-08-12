@@ -2,5 +2,9 @@
   "name"          : "Development Test Level",
   "section_count" : 10,
   "section_order" : "random",
-  "final_section" : "10.json"
+  "final_section" : "10.json",
+  "size"          : {
+    "width"  : 960,
+    "height" : 540
+  }
 }

@@ -24,6 +24,15 @@ class Game < AdventureRL::Window
     puts 'GAME OVER'
   end
 
+  def button_down btnid
+    super
+    @player.button_down btnid
+  end
+  def button_up btnid
+    super
+    @player.button_up btnid
+  end
+
   private
 
     def load_level directory

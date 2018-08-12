@@ -18,7 +18,7 @@ player:
     - 'player3.png'
   intervals:                  0.25
   z_index:                    10
-  precision_over_performance: true
+  precision_over_performance: :high
   solid_tag:                  :player
   solid_tag_collides_with:    :block
   size:
@@ -31,6 +31,7 @@ player:
     x: :center
     y: :center
   buttons:
+    auto_update: false
     pressable_buttons:
       test:
         - b  # TODO
@@ -56,7 +57,7 @@ player:
     y: 0
   speed:
     x: 600  # Uses Deltatime
-    y: 200  # Does NOT use Deltatime
+    y: 250  # Does NOT use Deltatime
   quick_turn_around: true
   gravity_force: 1100
   # WARNING: If hover_jump_speed is too high, it might exceed the gravity's velocity decrease.
@@ -66,7 +67,8 @@ player:
   jump_standing_on_block_padding: 4
 
 block:
-  precision_over_performance: true
+  precision_over_performance: :medium
+  auto_update:                false
   files:                      'block.png'
   intervals:                  0.5
   solid_tag:                  :block
@@ -82,6 +84,7 @@ unsafe_block:
 
 level:
   has_solids_manager: true
+  auto_update:        false
   origin:
     x: :left
     y: :top
@@ -92,6 +95,6 @@ section:
     y:  0
   # move_speed uses Deltatime
   move_speed:
-    x: 100
+    x: 5
     y: 0
 ...

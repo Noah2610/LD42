@@ -1,10 +1,13 @@
 class Section < AdventureRL::Layer
+  MOVE_INTERVAL_ID = :move
+
   def setup settings = {}
     @block_settings = settings.get(:blocks).map(&:keys_to_sym)
     @filename       = settings.get :filename
     @move_direction = settings.get :move_direction
     @move_speed     = settings.get :move_speed
     @deltatime      = AdventureRL::Deltatime.new
+    @timer          = AdventureRL::TimingHandler.new
   end
 
   def get_filename
@@ -14,20 +17,29 @@ class Section < AdventureRL::Layer
   def set_layer layer
     super
     add_blocks
+    set_interval
   end
 
   def update
-    move
     super
+    @timer.update
     @deltatime.update
   end
 
   private
 
+    def set_interval
+      @timer.every(
+        id:      MOVE_INTERVAL_ID,
+        seconds: 0.05,
+        method:  method(:move)
+      )
+    end
+
     def move
       move_by(
-        ((@move_speed[:x] * @move_direction[:x]) * @deltatime.dt),
-        ((@move_speed[:y] * @move_direction[:y]) * @deltatime.dt)
+        ((@move_speed[:x] * @move_direction[:x])),
+        ((@move_speed[:y] * @move_direction[:y]))
       )
     end
 

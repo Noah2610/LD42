@@ -9,8 +9,19 @@ class Player < AdventureRL::Animation
     @speed = settings.get(:speed)
     @jump_standing_on_block_padding = settings.get(:jump_standing_on_block_padding)
 
+    @timer = AdventureRL::TimingHandler.new
+    @timer.every seconds: 0.01, method: method(:update_interval)
+    @timer.every seconds: 0.05, method: method(:update_unsafe_collision)
+
     @is_jumping = false
     @has_jumped = false
+  end
+
+  def button_down btnid
+    @buttons_event_handler.button_down btnid
+  end
+  def button_up btnid
+    @buttons_event_handler.button_up btnid
   end
 
   def on_button_down btn
@@ -38,14 +49,22 @@ class Player < AdventureRL::Animation
     end
   end
 
-  def update
-    super
+  def update_interval
+    update_animation
     move
     if (@is_jumping)
       @is_jumping = false    if (bottom_is_touching_block?)
       hit_ceiling            if (get_velocity(:y) < 0 && top_is_touching_block?)
     end
+    @buttons_event_handler.update
+  end
+
+  def update_unsafe_collision
     touching_unsafe_block    if (is_touching_unsafe_block?)
+  end
+
+  def update
+    @timer.update
   end
 
   private

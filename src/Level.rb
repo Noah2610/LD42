@@ -1,9 +1,11 @@
 class Level < AdventureRL::Layer
   CONFIG_FILE_NAME = 'level.json'
+  ACTIVE_SECTIONS_AMOUNT = 2
 
   def setup settings = {}
     load_data_from_directory settings.get(:directory)
     @last_loaded_section_index = -1
+    @active_sections = []
   end
 
   def play
@@ -58,6 +60,7 @@ class Level < AdventureRL::Layer
         @sections.shuffle!
       end
       @sections << final_section
+      @sections.compact!
     end
 
     def add_next_section
@@ -65,5 +68,7 @@ class Level < AdventureRL::Layer
       return  unless (@last_loaded_section_index < @sections.size)
       section = @sections[@last_loaded_section_index]
       add section, "section_#{section.get_filename}"
+      @active_sections << section
+      @active_sections.shift([@active_sections.size - ACTIVE_SECTIONS_AMOUNT, 0].max)
     end
 end

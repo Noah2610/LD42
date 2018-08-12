@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/home/noah/.rvm/rubies/ruby-2.6.0-preview2/bin/ruby --jit
 
 require 'bundler'
 Bundler.setup
