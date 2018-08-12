@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Keyboard Shortcuts - StealthAction</title>
+    <link rel="stylesheet" href="./css/keybindings.css" />
+  </head>
+  <body>
+
+    <div id="content">
+
+      <div id="table_wrapper">
+        <table>
+          <tr>
+            <th id="th_shortcut">Key Combination</th>
+            <th id="th_description">Description</th>
+          </tr>
+
+          <tr>
+            <td class="shortcut">Escape</td>
+            <td class="description">Clear current key combination.</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">h/l/k/j, left/right/up/down</td>
+            <td class="description">Move block highlight one cell to the left/right/up/down, respectively.</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">0</td>
+            <td class="description">Move block highlight to beginning of row.</td>
+          </tr>
+          <tr>
+            <td class="shortcut">$</td>
+            <td class="description">Move block highlight to end of row.</td>
+          </tr>
+          <tr>
+            <td class="shortcut">g, H</td>
+            <td class="description">Move block highlight to top row.</td>
+          </tr>
+          <tr>
+            <td class="shortcut">G, L</td>
+            <td class="description">Move block highlight to bottom row.</td>
+          </tr>
+          <tr>
+            <td class="shortcut">M</td>
+            <td class="description">Move block highlight to center row.</td>
+          </tr>
+          <tr>
+            <td class="shortcut">m</td>
+            <td class="description">Move block highlight to center of grid.</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">Space, Enter</td>
+            <td class="description">Place highlighted block.</td>
+          </tr>
+          <tr>
+            <td class="shortcut">d, Backspace</td>
+            <td class="description">Remove block at top-left position of highlighted block.</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">p</td>
+            <td class="description">Toggle panel.</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">n</td>
+            <td class="description">Select next block.</td>
+          </tr>
+          <tr>
+            <td class="shortcut">N</td>
+            <td class="description">Select previous block.</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">x</td>
+            <td class="description">Switch placeable block sizes; w -&gt; h, h -&gt; w</td>
+          </tr>
+          <tr>
+            <td class="shortcut">X</td>
+            <td class="description">Switch placeable block offsets; x -&gt; y, y -&gt; x</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">cx</td>
+            <td class="description">Increase grid cell width (+8px).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">cy</td>
+            <td class="description">Increase grid cell height (+8px).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">Cx,cX,CX</td>
+            <td class="description">Decrease grid cell width (-8px).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">Cy,cY,CY</td>
+            <td class="description">Decrease grid cell height (-8px).</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">sx</td>
+            <td class="description">Increase placeable block width (+1/4 of current cell width).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">sy</td>
+            <td class="description">Increase placeable block height (+1/4 of current cell height).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">Sx,sX,SX</td>
+            <td class="description">Decrease placeable block width (-1/4 of current cell width).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">Sy,sY,SY</td>
+            <td class="description">Decrease placeable block height (-1/4 of current cell height).</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">ox,ax</td>
+            <td class="description">Increase placeable block offset X (+1/4 of current cell width).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">oy,ay</td>
+            <td class="description">Increase placeable block offset Y (+1/4 of current cell height).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">Ox,oX,OX, Ax,aX,AX</td>
+            <td class="description">Decrease placeable block offset X (-1/4 of current cell width).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">Oy,oY,OY, Ay,aY,AY</td>
+            <td class="description">Decrease placeable block offset Y (-1/4 of current cell height).</td>
+          </tr>
+
+          <tr>
+            <td class="shortcut">rc,cr</td>
+            <td class="description">Reset cell sizes to default (32x32).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">rs,sr</td>
+            <td class="description">Reset placeable block sizes to default (32x32).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">ro,or, ra,ar</td>
+            <td class="description">Reset placeable block offsets to default (0,0).</td>
+          </tr>
+          <tr>
+            <td class="shortcut">rr</td>
+            <td class="description">Reset sizes and offsets.</td>
+          </tr>
+
+
+        </table>
+      </div>
+
+
+      <div id="extra_wrapper">
+        <div class="extra">
+          These vim-like keyboard shortcuts are used by <b>consequtively pressing the keys</b> shown to the left.
+        </div>
+        <div class="extra">
+          Commas, in the table to the left, separate variants of the same shortcut.
+        </div>
+        <div class="extra">
+          You can use <b>number multipliers</b> (like in vim) by entering a number before (or during) a key combination; this will execute the shortcut <i>n</i> amount of times, consequetively.
+        </div>
+        <div class="extra">
+          On the Level-Editor page, in the bottom left corner you can see your keystrokes.
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+</html>

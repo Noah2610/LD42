@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Safe",
+    "color": "#00ff00"
+  },
+  {
+    "name": "Unsafe",
+    "color": "#ff0000"
+  }
+]

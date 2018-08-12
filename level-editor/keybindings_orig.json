@@ -1,0 +1,51 @@
+{
+  "directional": {
+    "up":    ["k","ArrowUp"],
+    "down":  ["j","ArrowDown"],
+    "left":  ["h","ArrowLeft"],
+    "right": ["l","ArrowRight"]
+  },
+  "center":               ["m"],
+  "row_top":              ["g","H"],
+  "row_bottom":           ["G","L"],
+  "row_center":           ["M"],
+  "row_start":            ["0"],
+  "row_end":              ["$"],
+  "place_block":          [" ","Enter"],
+  "remove_block":         ["d","Backspace"],
+  "toggle_panel":         ["p"],
+  "switch_block_size":    ["x"],
+  "switch_block_offset":  ["X"],
+  "next_block":           ["n"],
+  "prev_block":           ["N"],
+  "increase_box_size": {
+    "w": ["cx"],
+    "h": ["cy"]
+  },
+  "decrease_box_size": {
+    "w": ["cX","Cx","CX"],
+    "h": ["cY","Cy","CY"]
+  },
+  "increase_block_size": {
+    "w": ["sx"],
+    "h": ["sy"]
+  },
+  "decrease_block_size": {
+    "w": ["sX","Sx","SX"],
+    "h": ["sY","Sy","SY"]
+  },
+  "increase_block_offset": {
+    "x": ["ax","ox"],
+    "y": ["ay","oy"]
+  },
+  "decrease_block_offset": {
+    "x": ["aX","Ax","AX", "oX","Ox","OX"],
+    "y": ["aY","Ay","AY", "oY","Oy","OY"]
+  },
+  "reset": {
+    "all":          ["rr"],
+    "box_size":     ["rc","cr"],
+    "block_size":   ["rs","sr"],
+    "block_offset": ["ra","ar", "ro","or"]
+  }
+}

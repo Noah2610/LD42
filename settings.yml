@@ -14,9 +14,7 @@ buttons:
 
 player:
   files:
-    - 'player1.png'
-    - 'player2.png'
-    - 'player3.png'
+    - 'player.png'
   intervals:                  0.25
   z_index:                    10
   precision_over_performance: :high
@@ -25,8 +23,8 @@ player:
     - :block
     - :block_stuck
   size:
-    width:  16
-    height: 24
+    width:  12
+    height: 32
   # NOTE: The Player MUST have a centered origin (both axes),
   #       otherwise its #is_touching_* methods do not work.
   #       (Write a feature for the framework to avoid this in the future)

@@ -8,7 +8,7 @@ class Game < AdventureRL::Window
     setup_buttons_event_handler @settings.get(:buttons)
     setup_player @settings.get(:player)
 
-    load_level DIR[:levels].join('dev')
+    load_level DIR[:levels].join('editor')
     add @level
     @level.play
     @player.add_to_solids_manager @level.get_solids_manager

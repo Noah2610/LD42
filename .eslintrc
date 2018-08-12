@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "jquery"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6
+  }
+}
