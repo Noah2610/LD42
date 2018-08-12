@@ -6,6 +6,7 @@ size:
   width:  960
   height: 540
 buttons:
+  auto_update: true
   pressable_buttons:
     quit:
       - 'q'
@@ -49,7 +50,7 @@ player:
         - up
         - k
   max_velocity:
-    x: 200
+    x: 250
   velocity_decay:
     x: 750
   base_velocity:
@@ -67,7 +68,7 @@ player:
   jump_standing_on_block_padding: 4
 
 block:
-  precision_over_performance: :medium
+  precision_over_performance: :low
   auto_update:                false
   files:                      'block.png'
   intervals:                  0.5
@@ -83,8 +84,10 @@ unsafe_block:
   intervals: 0.5
 
 level:
-  has_solids_manager: true
   auto_update:        false
+  has_solids_manager: true
+  solids_manager:
+    use_cache: false
   origin:
     x: :left
     y: :top

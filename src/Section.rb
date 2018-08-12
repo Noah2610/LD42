@@ -20,6 +20,17 @@ class Section < AdventureRL::Layer
     set_interval
   end
 
+  def on_button_press btn
+    move_by(
+      ((@move_speed[:x] * @move_direction[:x])),
+      ((@move_speed[:y] * @move_direction[:y]))
+    )  if (btn == :left)
+    move_by(
+      ((-@move_speed[:x] * @move_direction[:x])),
+      ((-@move_speed[:y] * @move_direction[:y]))
+    )  if (btn == :right)
+  end
+
   def update
     super
     @timer.update
@@ -31,7 +42,7 @@ class Section < AdventureRL::Layer
     def set_interval
       @timer.every(
         id:      MOVE_INTERVAL_ID,
-        seconds: 0.05,
+        seconds: 0.02,
         method:  method(:move)
       )
     end

@@ -6,6 +6,19 @@ class Level < AdventureRL::Layer
     load_data_from_directory settings.get(:directory)
     @last_loaded_section_index = -1
     @active_sections = []
+
+    # TODO
+    @buttons = AdventureRL::EventHandlers::Buttons.new auto_update: true
+    @buttons.add_pressable_button(
+      left:  :x,
+      right: :c
+    )
+  end
+
+  def update
+    # TODO
+    super
+    @buttons.update
   end
 
   def play
@@ -68,6 +81,10 @@ class Level < AdventureRL::Layer
       return  unless (@last_loaded_section_index < @sections.size)
       section = @sections[@last_loaded_section_index]
       add section, "section_#{section.get_filename}"
+
+      # TODO
+      @buttons.subscribe section
+
       @active_sections << section
       @active_sections.shift([@active_sections.size - ACTIVE_SECTIONS_AMOUNT, 0].max)
     end
