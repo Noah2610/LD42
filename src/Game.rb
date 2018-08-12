@@ -1,4 +1,8 @@
 class Game < AdventureRL::Window
+  DIGEST = {
+    MD5: OpenSSL::Digest.new('MD5')
+  }
+
   def setup settings
     @settings = settings
     setup_buttons_event_handler @settings.get(:buttons)
@@ -38,7 +42,7 @@ class Game < AdventureRL::Window
     def load_level directory
       level_settings = @settings.get(:level).merge(
         directory: directory,
-        position:  get_corner(:right, :top),
+        position:  get_corner(:left, :top),
         size:      get_size
       )
       @level = Level.new level_settings

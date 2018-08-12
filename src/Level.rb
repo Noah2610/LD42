@@ -1,28 +1,45 @@
 class Level < AdventureRL::Layer
+  MOVE_INTERVAL_ID = :move
   CONFIG_FILE_NAME = 'level.json'
   ACTIVE_SECTIONS_AMOUNT = 2
 
   def setup settings = {}
     load_data_from_directory settings.get(:directory)
     @last_loaded_section_index = -1
-    @active_sections = []
-
-    # TODO
-    @buttons = AdventureRL::EventHandlers::Buttons.new auto_update: true
-    @buttons.add_pressable_button(
-      left:  :x,
-      right: :c
-    )
-  end
-
-  def update
-    # TODO
-    super
-    @buttons.update
+    @timer = AdventureRL::TimingHandler.new
+    add @timer
   end
 
   def play
     add_next_section
+    set_interval
+  end
+
+  def add_next_section
+    #[(ACTIVE_SECTIONS_AMOUNT - get_objects.size), 0].max.times do
+    last_section = @sections[@last_loaded_section_index]  if     (@last_loaded_section_index >= 0 && @last_loaded_section_index < @sections.size)
+    @last_loaded_section_index += 1
+    return                                                unless (@last_loaded_section_index < @sections.size)
+    new_section = @sections[@last_loaded_section_index]
+    puts "LAST: #{last_section.get_id}"  if (last_section)
+    puts "LOAD: #{new_section.get_id}"
+    puts "EQUAL: #{new_section == last_section}"
+    new_section.set_position((last_section || self).get_corner(:right, :top))  # NOTE: Adjust if Sections should move into different direction
+    add new_section, new_section.get_id
+    #end
+
+    # TODO
+    #@active_sections.shift([@active_sections.size - ACTIVE_SECTIONS_AMOUNT, 0].max)
+  end
+
+  def remove_section section
+    remove_object section.get_id
+  end
+
+  def move_sections
+    get_objects.each do |object|
+      object.move  if (object.is_a? Section)
+    end
   end
 
   private
@@ -47,7 +64,11 @@ class Level < AdventureRL::Layer
           ).merge(
             AdventureRL::Settings.new(file)
           ).merge(
-            filename: basename
+            @config.get(:section)
+          ).merge(
+            level:    self,
+            filename: basename,
+            position: get_corner(:right, :top)
           )
         )
         if (@config.get(:final_section).sub(/\.json\z/i,'') == basename.sub(/\.json\z/i, ''))
@@ -56,6 +77,12 @@ class Level < AdventureRL::Layer
           @sections << section
         end
       end
+      sort_sections
+      @sections << final_section
+      @sections.compact!
+    end
+
+    def sort_sections
       case section_order = @config.get(:section_order)
       when Array
         @sections = @sections.select do |section|
@@ -67,25 +94,20 @@ class Level < AdventureRL::Layer
         end
       when 'random'
         @sections = @config.get(:section_count).times.map do
-          next @sections.sample
+          section = @sections.sample.dup
+          section.generate_id
+          next section
         end
       when 'shuffle'
         @sections.shuffle!
       end
-      @sections << final_section
-      @sections.compact!
     end
 
-    def add_next_section
-      @last_loaded_section_index += 1
-      return  unless (@last_loaded_section_index < @sections.size)
-      section = @sections[@last_loaded_section_index]
-      add section, "section_#{section.get_filename}"
-
-      # TODO
-      @buttons.subscribe section
-
-      @active_sections << section
-      @active_sections.shift([@active_sections.size - ACTIVE_SECTIONS_AMOUNT, 0].max)
+    def set_interval
+      @timer.every(
+        id:      MOVE_INTERVAL_ID,
+        seconds: @settings.get(:move_interval),
+        method:  method(:move_sections)
+      )
     end
 end

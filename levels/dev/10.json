@@ -1,4 +1,8 @@
 {
+  "size": {
+    "width": 960,
+    "height": 540
+  },
   "blocks": [
     {
       "class": "Safe",
@@ -126,7 +130,7 @@
         "y": 476
       },
       "size": {
-        "width":  384,
+        "width":  320,
         "height": 128
       }
     },
@@ -219,6 +223,19 @@
       "size": {
         "width":  128,
         "height": 16
+      }
+    },
+    {
+      "class": "Safe",
+      "files": "safe_block.png",
+      "intervals": 0.5,
+      "position": {
+        "x": 320,
+        "y": 348
+      },
+      "size": {
+        "width":  64,
+        "height": 128
       }
     }
   ]

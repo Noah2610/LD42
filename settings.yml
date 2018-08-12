@@ -86,6 +86,7 @@ unsafe_block:
 level:
   auto_update:        false
   has_solids_manager: true
+  move_interval: 0.03
   solids_manager:
     use_cache: false
   origin:
@@ -93,11 +94,18 @@ level:
     y: :top
 
 section:
+  auto_update:        false
+  has_solids_manager: false
+  # NOTE:
+  # Settings in the level's config file under key 'section' takes precedence.
   move_direction:
     x: -1
     y:  0
-  # move_speed uses Deltatime
+  # move_speed doesn't use Deltatime
   move_speed:
     x: 5
     y: 0
+  origin:
+    x: :left
+    y: :top
 ...
