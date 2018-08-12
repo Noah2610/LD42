@@ -19,6 +19,8 @@ player:
   intervals:                  0.25
   z_index:                    10
   precision_over_performance: true
+  solid_tag:                  :player
+  solid_tag_collides_with:    :block
   size:
     width:  16
     height: 24
@@ -64,8 +66,11 @@ player:
   jump_standing_on_block_padding: 4
 
 block:
-  files:     'block.png'
-  intervals: 0.5
+  precision_over_performance: true
+  files:                      'block.png'
+  intervals:                  0.5
+  solid_tag:                  :block
+  solid_tag_collides_with:    :player
 
 safe_block:
   files:     'safe_block.png'
@@ -87,6 +92,6 @@ section:
     y:  0
   # move_speed uses Deltatime
   move_speed:
-    x: 50
+    x: 100
     y: 0
 ...
