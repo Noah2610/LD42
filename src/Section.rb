@@ -67,9 +67,7 @@ class Section < AdventureRL::Layer
       get_objects.each do |object|
         next  unless (block_moving?(object))
         # NOTE: Adjust for making Sections move into a different direction.
-        if    (object.get_real_side(:left) <= @level.get_real_side(:left))
-          object.make_stuck
-        end
+        object.make_stuck  if (object.get_real_side(:left) <= @level.get_real_side(:left))
       end
     end
 

@@ -38,7 +38,6 @@ module Blocks
     end
 
     def is_colliding_with_objects objects
-      #puts 'CHECK'  # TODO
       return      if (is_stuck?)
       make_stuck  if (objects.any? { |o| next (o.is_stuck?  rescue false) })
     end

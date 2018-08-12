@@ -70,7 +70,7 @@ player:
   jump_standing_on_block_padding: 4
 
 block:
-  precision_over_performance: :low
+  precision_over_performance: :medium
   auto_update:                false
   files:                      'block.png'
   intervals:                  0.5
