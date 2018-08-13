@@ -10,9 +10,36 @@ class Game < AdventureRL::Window
     setup_level_manager
     # @menu.activate  # NOTE: We activate it by default in settings.yml
 
-    @current_level_name = 'art'
+    @level_names = [
+      'dev',
+      'art'
+    ]
+    @current_level_name_index = 0
+
+    textbox_settings = @settings.get(:thankyou_textbox)
+    @thankyou_textbox = AdventureRL::Textbox.new(
+      textbox_settings.merge(
+        position: {
+          x: (get_side(:right)  * textbox_settings[:x]),
+          y: (get_side(:bottom) * textbox_settings[:y])
+        }
+      )
+    )
+
+    @background_image = AdventureRL::Image.new(
+      @settings.get(:background_image).merge(
+        file:     DIR[:images].join(@settings.get(:background_image)[:file]),
+        position: get_corner(:left, :top),
+        size:     get_size
+      )
+    )
+    add @background_image, :background_image
+
+    @song = Gosu::Song.new DIR[:audio].join(@settings.get(:song_file))
 
     @timer = AdventureRL::TimingHandler.new
+
+    # TODO
     @timer.every seconds: 0.5 do
       puts Gosu.fps
     end
@@ -23,10 +50,13 @@ class Game < AdventureRL::Window
     return @timer
   end
 
-  def start_game level_name = @current_level_name
-    @current_level_name = level_name
+  def start_game level_name_index = @current_level_name_index
+    @song.play !!:loop  unless (@song.playing?)
+    remove :background_image
+    remove :thankyou
+    level_name = @level_names[@current_level_name_index]
     setup_player
-    @level_manager.load_level @current_level_name
+    @level_manager.load_level level_name
     @level_manager.add_player @player
     @level_manager.play
     @player.add_to_solids_manager @level_manager.get_level.get_solids_manager
@@ -60,14 +90,31 @@ class Game < AdventureRL::Window
   end
 
   def to_main_menu
+    @song.stop
+    add @background_image, :background_image
     stop_level
     @menus.values.each &:deactivate
     @menus[:main].activate
   end
 
   def win_level
-    puts 'WON'
-    @player.lose_control
+    @player.win_level
+  end
+
+  def open_win_menu
+    @menus.values.each &:deactivate
+    @menus[:win].activate
+  end
+
+  def next_level
+    @current_level_name_index += 1
+    if (@current_level_name_index >= @level_names.size)
+      @current_level_name_index = 0
+      add @thankyou_textbox, :thankyou
+      to_main_menu
+      return
+    end
+    reset_level
   end
 
   def game_over
@@ -141,6 +188,12 @@ class Game < AdventureRL::Window
         size:     get_size
       }.merge(
         @settings.get(:death_menu)
+      ))
+      @menus[:win] = Menus::Win.new({
+        position: get_corner(:left, :top),
+        size:     get_size
+      }.merge(
+        @settings.get(:win_menu)
       ))
       @menus.values.each do |menu|
         add menu

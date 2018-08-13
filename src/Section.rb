@@ -5,6 +5,14 @@ class Section < AdventureRL::Layer
     @filename       = settings.get :filename
     @move_direction = settings.get :move_direction
     @move_speed     = settings.get :move_speed
+    @image          = AdventureRL::Image.new(
+      settings.get(:image).merge(
+        file:     DIR[:images].join(settings.get(:image)[:file]),
+        position: get_corner(:left, :top),
+        size:     get_size
+      )
+    )
+    add @image
     generate_id
     @added_next_section = false
     @is_final_section   = false
@@ -83,7 +91,7 @@ class Section < AdventureRL::Layer
         if    (stuckable_block?(object))
           # NOTE: Adjust for making Sections move into a different direction.
           object.make_stuck     if (object.get_real_side(:left) <= @level.get_real_side(:left))
-        elsif (object.is_a?(Blocks::Block))
+        elsif (object.is_a?(Blocks::Block) || object.is_a?(AdventureRL::Image))
           remove_object object  if (object.get_real_side(:right) <= @level.get_real_side(:left))
         end
       end

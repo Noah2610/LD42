@@ -15,9 +15,12 @@ class Player < AdventureRL::Animation
 
     @is_jumping = false
     @has_jumped = false
+    @has_won    = false
+
+    load_animations
   end
 
-  def lose_control
+  def win_level
     @buttons_event_handler.unsubscribe self
     @velocity_decay[:x] = 0
     @gravity_force = 0
@@ -29,6 +32,8 @@ class Player < AdventureRL::Animation
       x: 100,
       y: 0
     )
+    @is_jumping = false
+    @has_won = true
   end
 
   def get_deltatime
@@ -66,6 +71,14 @@ class Player < AdventureRL::Animation
   def update_interval
     update_animation
     move
+    if (@has_won)
+      GAME.open_win_menu  if (get_real_side(:right) > get_layer.get_real_side(:right))
+    else
+      layer = get_layer
+      set_position(
+        x: (layer.get_real_side(:right) - (get_size(:width) * 0.5).ceil)
+      )  if (get_real_side(:right) > layer.get_real_side(:right))
+    end
     if (@is_jumping)
       @is_jumping = false    if (bottom_is_touching_block?)
       hit_ceiling            if (get_velocity(:y) < 0 && top_is_touching_block?)
@@ -73,8 +86,22 @@ class Player < AdventureRL::Animation
     @buttons_event_handler.update
   end
 
+  def update_animation
+    if    (@is_jumping)
+      set_animation :jumping
+    elsif (get_velocity(:x).abs > 0)
+      set_animation :moving
+    else
+      set_animation :idle
+    end
+    super
+  end
+
   def update_unsafe_collision
-    touching_unsafe_block    if (is_touching_unsafe_block?)
+    touching_unsafe_block  if (
+      is_touching_unsafe_block? ||
+      get_real_side(:top) > get_layer.get_real_side(:bottom)
+    )
   end
 
   def update
@@ -82,6 +109,25 @@ class Player < AdventureRL::Animation
   end
 
   private
+
+    def load_animations
+      animations_data = @settings.get(:animations)
+      @animations = animations_data.map do |name, data|
+        files = [data[:files]].flatten.map do |filename|
+          next DIR[:images].join(filename)
+        end
+        next [name, {
+          images:    get_images_from(files),
+          intervals: [data[:intervals]].flatten
+        }]
+      end .to_h
+      set_animation :idle
+    end
+
+    def set_animation name
+      @images              = @animations[name][:images]
+      @animation_intervals = @animations[name][:intervals]
+    end
 
     def setup_buttons_event_handler
       @buttons_event_handler = AdventureRL::EventHandlers::Buttons.new @settings.get(:buttons_event_handler)

@@ -11,10 +11,43 @@ buttons_event_handler:
     quit:
       - 'q'
       - 'escape'
+background_color: 0xff_ffffff
+background_z_index: -10
+background_image:
+    file: 'mainmenu_background.png'
+    origin:
+      x: :left
+      y: :top
+    z_index: -5
+song_file: 'song.wav'
 
 player:
-  files:
-    - 'player.png'
+  animations:
+    idle:
+      files:
+        - 'player1.png'
+        - 'player2.png'
+        - 'player3.png'
+      intervals: 0.5
+    moving:
+      files:
+        - 'player.png'
+        - 'player1.png'
+        - 'player2.png'
+        - 'player3.png'
+      intervals:
+        - 0.5
+        - 0.1
+        - 0.1
+        - 0.1
+    jumping:
+      files:
+        - 'star_1.png'
+        - 'star_2.png'
+        - 'star_3.png'
+        - 'star_4.png'
+      intervals: 0.25
+  files: 'player.png'
   intervals:                  0.25
   z_index:                    5
   precision_over_performance: :high
@@ -122,6 +155,13 @@ section:
   move_speed:
     x: 5
     y: 0
+  image:
+    file: 'section_background.png'
+    retro: true
+    z_index: -1
+    origin:
+      x: :left
+      y: :top
   origin:
     x: :left
     y: :top
@@ -298,4 +338,73 @@ death_menu:
       x: :center
       y: :center
     z_index: 10
+
+win_menu:
+  z_index:     10
+  active:      false
+  auto_update: true
+  mouse_buttons_event_handler:
+    only_mouse_buttons: true
+    auto_update: false
+  buttons_event_handler:
+    auto_update: false
+    pressable_buttons:
+      next:
+        - return
+        - space
+        - n
+      to_main:
+        - q
+        - escape
+  next:
+    text: 'Next Level'
+    x: 0.5
+    y: 0.6
+    origin:
+      x: :center
+      y: :center
+  to_main:
+    text: 'To Main Menu'
+    x: 0.5
+    y: 0.7
+    origin:
+      x: :center
+      y: :center
+  title_image:
+    file: 'mainmenu_title.png'
+    x: 0.5
+    y: 0.25
+    size:
+      width:  512
+      height: 64
+    origin:
+      x: :center
+      y: :center
+    z_index: 10
+
+thankyou_textbox:
+  x: 0.8
+  y: 0.9
+  text: 'You Win! Thank You For Playing!'
+  font_size: 24
+  font_name: 'MonoSpace'
+  font_color: 0xff_224488
+  text_alignment:
+    x: :center
+    y: :center
+  border_padding:
+    x: 0
+    y: 0
+  border_color: 0x00_000000
+  border_size:
+    width:  0
+    height: 0
+  background_color: 0x00_000000
+  z_index: 10
+  size:
+    width:  256
+    height: 64
+  origin:
+    x: :right
+    y: :bottom
 ...

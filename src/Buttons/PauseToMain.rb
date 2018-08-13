@@ -9,9 +9,9 @@ module Buttons
     end
 
     def click
-      get_menu.deactivate
-      GAME.stop_level
-      GAME.get_menu(:main).activate
+      #get_menu.deactivate
+      #GAME.stop_level
+      GAME.to_main_menu
     end
   end
 end
