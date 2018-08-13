@@ -7,7 +7,10 @@ class Game < AdventureRL::Window
     @settings = settings
     setup_buttons_event_handler
     setup_menus
+    setup_level_manager
     # @menu.activate  # NOTE: We activate it by default in settings.yml
+
+    @current_level_name = 'dev'
 
     @timer = AdventureRL::TimingHandler.new
     @timer.every seconds: 0.5 do
@@ -16,31 +19,29 @@ class Game < AdventureRL::Window
     add @timer
   end
 
-  def start_game
-    # TODO: Manage by LevelManager
+  def get_timer
+    return @timer
+  end
+
+  def start_game level_name = @current_level_name
+    @current_level_name = level_name
     setup_player
-    setup_level
-    add @level
-    @level.add @player, :player
-    @level.play
-    @player.add_to_solids_manager @level.get_solids_manager
+    @level_manager.load_level @current_level_name
+    @level_manager.add_player @player
+    @level_manager.play
+    @player.add_to_solids_manager @level_manager.get_level.get_solids_manager
   end
 
   def continue_level
-    return  if (@level.is_playing?)
-    @menus[:pause].deactivate
-    @timer.in seconds: 0.01, method: @level.method(:continue)
+    @menus[:pause].deactivate  if (@level_manager.continue)
   end
 
   def pause_level
-    return  if (@level.is_paused?)
-    @level.pause
-    @menus[:pause].activate
+    @menus[:pause].activate  if (@level_manager.pause)
   end
 
   def stop_level
-    remove @level   if (@level)
-    remove @player  if (@player)
+    @level_manager.stop
   end
 
   def reset_level
@@ -49,7 +50,7 @@ class Game < AdventureRL::Window
   end
 
   def get_level
-    return @level
+    return @level_manager.get_level
   end
 
   def get_menu target = :all
@@ -75,7 +76,7 @@ class Game < AdventureRL::Window
     super
     # TODO
     # Call #button_down on LevelManager
-    @level.button_down btnid  if (@level)
+    @level_manager.button_down btnid
     #@menu.button_down btnid   if (@menu)
     #@player.button_down btnid
   end
@@ -83,29 +84,21 @@ class Game < AdventureRL::Window
     super
     # TODO
     # Call #button_up on LevelManager
-    @level.button_up btnid  if (@level)
+    @level_manager.button_up btnid
     #@menu.button_up btnid   if (@menu)
     #@player.button_up btnid
   end
 
   private
 
-    def setup_level
-      load_level DIR[:levels].join(@settings.get(:level_name))
-    end
-
-    def load_level directory
-      level_settings = @settings.get(:level).merge(
-        directory: directory,
-        position:  get_corner(:left, :top),
-        size:      get_size
-      )
-      @level = Level.new level_settings
-    end
-
     def setup_buttons_event_handler
       #@buttons_event_handler = AdventureRL::EventHandlers::Buttons.new @settings.get(:buttons_event_handler)
       #@buttons_event_handler.subscribe self
+    end
+
+    def setup_level_manager
+      @level_manager = LevelManager.new @settings.get(:level)
+      add @level_manager
     end
 
     def setup_player

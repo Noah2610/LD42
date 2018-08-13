@@ -12,8 +12,6 @@ buttons_event_handler:
       - 'q'
       - 'escape'
 
-level_name: 'dev'  # The name of the directory, containing the Level's sections
-
 player:
   files:
     - 'player.png'
