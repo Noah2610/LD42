@@ -13,44 +13,35 @@ buttons_event_handler:
 background_color: 0xff_ffffff
 background_z_index: -10
 background_image:
-    file: 'mainmenu_background.png'
+    file: 'bg/bg_1.png'
     origin:
       x: :left
       y: :top
     z_index: -5
 level_names:
-  - 'dev'
-  - 'art'
+  - 'one'
 song_file: 'song.wav'
 
 player:
   animations:
     idle:
       files:
-        - 'player1.png'
-        - 'player2.png'
-        - 'player3.png'
-      intervals: 0.5
+        - 'player/idle.png'
+      intervals: 0.1
     moving:
       files:
-        - 'player.png'
-        - 'player1.png'
-        - 'player2.png'
-        - 'player3.png'
+        - 'player/moving/moving_1.png'
+        - 'player/moving/moving_2.png'
+        - 'player/moving/moving_1.png'
+        - 'player/moving/moving_3.png'
       intervals:
-        - 0.5
-        - 0.1
-        - 0.1
-        - 0.1
+        - 0.25
     jumping:
       files:
-        - 'star_1.png'
-        - 'star_2.png'
-        - 'star_3.png'
-        - 'star_4.png'
-      intervals: 0.25
-  files: 'player.png'
-  intervals:                  0.25
+        - 'player/jumping.png'
+      intervals: 0.1
+  files: 'player/idle.png'
+  intervals:                  1
   z_index:                    5
   precision_over_performance: :high
   solid_tag:                  :player
@@ -58,8 +49,8 @@ player:
     - :block
     - :block_stuck
   size:
-    width:  12
-    height: 32
+    width:  32
+    height: 48
   # NOTE: The Player MUST have a centered origin (both axes),
   #       otherwise its #is_touching_* methods do not work.
   #       (Write a feature for the framework to avoid this in the future)
@@ -69,8 +60,6 @@ player:
   buttons_event_handler:
     auto_update: false
     pressable_buttons:
-      test:
-        - b  # TODO
       move_left:
         - a
         - left
@@ -85,14 +74,14 @@ player:
         - up
         - k
   max_velocity:
-    x: 250
+    x: 300
   velocity_decay:
     x: 750
   base_velocity:
-    x: 50
+    x: 100
     y: 0
   speed:
-    x: 600  # Uses Deltatime
+    x: 700  # Uses Deltatime
     y: 250  # Does NOT use Deltatime
   quick_turn_around: true
   gravity_force: 1100
@@ -105,25 +94,23 @@ player:
 block:
   precision_over_performance: :medium
   auto_update:                false
-  files:                      'block.png'
-  intervals:                  0.5
+  files:                      'platform.png'
+  intervals:                  1
   solid_tag:                  :block
-  solid_tag_collides_with:
-    - :player
+  solid_tag_collides_with:    :player
 
 safe_block:
-  files:     'safe_block.png'
-  intervals: 0.5
+  files:     'platform.png'
+  intervals: 1
   solid_tag_collides_with: :player
   z_index: 0
 
 unsafe_block:
   files:
-    - 'star/star0.png'
-    - 'star/star1.png'
-    - 'star/star2.png'
-    - 'star/star1.png'
-  intervals: 0.5
+    - 'stars/star_1/star_1.1.png'
+    - 'stars/star_1/star_1.2.png'
+    - 'stars/star_1/star_1.3.png'
+  intervals: 0.6
   solid_tag_collides_with:
     - :player
     - :block_stuck
@@ -132,7 +119,7 @@ unsafe_block:
 level:
   auto_update:        false
   has_solids_manager: true
-  move_interval: 0.03
+  move_interval:      0.03
   solids_manager:
     use_cache: false
   origin:
@@ -158,7 +145,7 @@ section:
     x: 5
     y: 0
   image:
-    file: 'section_background.png'
+    file: 'bg/bg_1.png'
     retro: true
     z_index: -1
     origin:
@@ -387,10 +374,10 @@ win_menu:
 thankyou_textbox:
   x: 0.8
   y: 0.9
-  text: 'You Win! Thank You For Playing!'
+  text: 'CONGRATULATIONS, you ran out of SPACE! Thank You For Playing!'
   font_size: 24
   font_name: 'MonoSpace'
-  font_color: 0xff_224488
+  font_color: 0xff_aaaaaa
   text_alignment:
     x: :center
     y: :center

@@ -1,7 +1,6 @@
 class Level < AdventureRL::Layer
   MOVE_INTERVAL_ID = :move
   CONFIG_FILE_NAME = 'level.json'
-  ACTIVE_SECTIONS_AMOUNT = 2
 
   def setup
     setup_buttons_event_handler
@@ -39,14 +38,10 @@ class Level < AdventureRL::Layer
   end
 
   def add_next_section
-    #[(ACTIVE_SECTIONS_AMOUNT - get_objects.size), 0].max.times do
     last_section = @sections[@last_loaded_section_index]  if     (@last_loaded_section_index >= 0 && @last_loaded_section_index < @sections.size)
     @last_loaded_section_index += 1
     return                                                unless (@last_loaded_section_index < @sections.size)
     new_section = @sections[@last_loaded_section_index]
-    #puts "LAST: #{last_section.get_id}"  if (last_section)
-    #puts "LOAD: #{new_section.get_id}"
-    #puts "EQUAL: #{new_section == last_section}"
     # NOTE: Adjust if Sections should move into different direction
     if (last_section)
       position = last_section.get_corner :right, :top
@@ -55,10 +50,6 @@ class Level < AdventureRL::Layer
     end
     new_section.set_position position
     add new_section, new_section.get_id
-    #end
-
-    # TODO
-    #@active_sections.shift([@active_sections.size - ACTIVE_SECTIONS_AMOUNT, 0].max)
   end
 
   def remove_section section

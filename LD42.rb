@@ -3,8 +3,6 @@
 require 'bundler'
 Bundler.setup
 
-require 'byebug'
-
 require 'pathname'
 require 'openssl'
 require 'adventure_rl'

@@ -124,7 +124,6 @@ class Game < AdventureRL::Window
   end
 
   def on_button_down btn
-    puts btn
     toggle_mute  if (btn == :toggle_music)
   end
 

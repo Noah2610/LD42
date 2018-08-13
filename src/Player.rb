@@ -69,8 +69,8 @@ class Player < AdventureRL::Animation
   end
 
   def update_interval
-    update_animation
     move
+    update_animation
     if (@has_won)
       GAME.open_win_menu  if (get_real_side(:right) > get_layer.get_real_side(:right))
     else
@@ -108,6 +108,14 @@ class Player < AdventureRL::Animation
     @timer.update
   end
 
+  def draw
+    scale =  1
+    scale = -1  if (get_velocity(:x) < 0)
+    Gosu.scale scale, 1, x, y do
+      super
+    end
+  end
+
   private
 
     def load_animations
@@ -125,8 +133,11 @@ class Player < AdventureRL::Animation
     end
 
     def set_animation name
+      return  if (@current_animation == name)
+      @current_animation = name
       @images              = @animations[name][:images]
       @animation_intervals = @animations[name][:intervals]
+      @current_image_index = 0
     end
 
     def setup_buttons_event_handler
