@@ -6,8 +6,8 @@ class Section < AdventureRL::Layer
     @move_direction = settings.get :move_direction
     @move_speed     = settings.get :move_speed
     generate_id
-
     @added_next_section = false
+    @is_final_section   = false
   end
 
   def generate_id
@@ -39,6 +39,14 @@ class Section < AdventureRL::Layer
     ))
   end
 
+  def is_final_section
+    @is_final_section = true
+  end
+
+  def is_final_section?
+    return !!@is_final_section
+  end
+
   private
 
     def set_interval
@@ -60,6 +68,13 @@ class Section < AdventureRL::Layer
         end
         check_block_collisions
         #@level.remove_section self  if (get_side(:right) < @level.get_side(:left))
+      end
+      check_final_section_collision  if (is_final_section?)
+    end
+
+    def check_final_section_collision
+      if (@level.get_object(:player).get_real_side(:left) >= get_real_side(:right))
+        GAME.win_level
       end
     end
 

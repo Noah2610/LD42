@@ -192,6 +192,7 @@ main_menu:
     origin:
       x: :left
       y: :top
+    z_index: 10
   credits_image:
     file: 'mainmenu_credits.png'
     x: 0.8
@@ -253,4 +254,48 @@ pause_menu:
     origin:
       x: :center
       y: :center
+    z_index: 10
+
+death_menu:
+  z_index:     10
+  active:      false
+  auto_update: true
+  mouse_buttons_event_handler:
+    only_mouse_buttons: true
+    auto_update: false
+  buttons_event_handler:
+    auto_update: false
+    pressable_buttons:
+      retry:
+        - r
+        - return
+        - space
+      to_main:
+        - q
+        - escape
+  retry:
+    text: 'Retry'
+    x: 0.5
+    y: 0.6
+    origin:
+      x: :center
+      y: :center
+  to_main:
+    text: 'To Main Menu'
+    x: 0.5
+    y: 0.7
+    origin:
+      x: :center
+      y: :center
+  title_image:
+    file: 'mainmenu_title.png'
+    x: 0.5
+    y: 0.25
+    size:
+      width:  512
+      height: 64
+    origin:
+      x: :center
+      y: :center
+    z_index: 10
 ...

@@ -138,6 +138,7 @@ class Level < AdventureRL::Layer
           )
         )
         if (@config.get(:final_section).sub(/\.json\z/i,'') == basename.sub(/\.json\z/i, ''))
+          section.is_final_section
           final_section = section
         else
           @sections << section

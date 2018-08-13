@@ -10,7 +10,7 @@ class Game < AdventureRL::Window
     setup_level_manager
     # @menu.activate  # NOTE: We activate it by default in settings.yml
 
-    @current_level_name = 'dev'
+    @current_level_name = 'art'
 
     @timer = AdventureRL::TimingHandler.new
     @timer.every seconds: 0.5 do
@@ -59,8 +59,20 @@ class Game < AdventureRL::Window
     return nil
   end
 
+  def to_main_menu
+    stop_level
+    @menus.values.each &:deactivate
+    @menus[:main].activate
+  end
+
+  def win_level
+    puts 'WON'
+    @player.lose_control
+  end
+
   def game_over
-    puts 'GAME OVER'
+    @level_manager.pause
+    @menus[:death].activate
   end
 
   def quit
@@ -124,7 +136,12 @@ class Game < AdventureRL::Window
       }.merge(
         @settings.get(:pause_menu)
       ))
-      # TODO: Init other Menus here.
+      @menus[:death] = Menus::Death.new({
+        position: get_corner(:left, :top),
+        size:     get_size
+      }.merge(
+        @settings.get(:death_menu)
+      ))
       @menus.values.each do |menu|
         add menu
       end

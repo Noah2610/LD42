@@ -11,10 +11,24 @@ class Player < AdventureRL::Animation
 
     @timer = AdventureRL::TimingHandler.new
     @timer.every seconds: 0.01, method: method(:update_interval)
-    @timer.every seconds: 0.05, method: method(:update_unsafe_collision)
+    @timer.every seconds: 0.02, method: method(:update_unsafe_collision)
 
     @is_jumping = false
     @has_jumped = false
+  end
+
+  def lose_control
+    @buttons_event_handler.unsubscribe self
+    @velocity_decay[:x] = 0
+    @gravity_force = 0
+    remove_from_solids_manager
+    set_solid_tags nil
+    set_solid_tags_collides_with nil
+    @solids_manager = nil
+    set_velocity(
+      x: 100,
+      y: 0
+    )
   end
 
   def get_deltatime
