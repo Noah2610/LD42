@@ -12,6 +12,8 @@ buttons:
       - 'q'
       - 'escape'
 
+level_name: 'dev'  # The name of the directory, containing the Level's sections
+
 player:
   files:
     - 'player.png'
@@ -83,10 +85,10 @@ safe_block:
 
 unsafe_block:
   files:
-    - 'star_1.png'
-    - 'star_2.png'
-    - 'star_3.png'
-    - 'star_4.png'
+    - 'star/star0.png'
+    - 'star/star1.png'
+    - 'star/star2.png'
+    - 'star/star1.png'
   intervals: 0.5
 
 level:

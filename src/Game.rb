@@ -8,15 +8,15 @@ class Game < AdventureRL::Window
     setup_buttons_event_handler @settings.get(:buttons)
     setup_player @settings.get(:player)
 
-    load_level DIR[:levels].join('editor')
+    load_level DIR[:levels].join(@settings.get(:level_name))
     add @level
     @level.play
     @player.add_to_solids_manager @level.get_solids_manager
 
     @timer = AdventureRL::TimingHandler.new
-    #@timer.every seconds: 0.5 do
-    #  puts Gosu.fps
-    #end
+    @timer.every seconds: 0.5 do
+      puts Gosu.fps
+    end
     add @timer
   end
 
