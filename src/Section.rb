@@ -20,7 +20,7 @@ class Section < AdventureRL::Layer
 
   def generate_id
     chr_ids = (32 .. 126).to_a.shuffle
-    @id = Game::DIGEST[:MD5].hexdigest(
+    @id = (
       "#{@settings.to_s}_#{10000.times.map do
         next chr_ids.sample.chr
       end .join('')}"  # NOTE: Add some random printable characters, to make the id virtually unique

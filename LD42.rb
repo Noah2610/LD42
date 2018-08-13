@@ -4,7 +4,6 @@ require 'bundler'
 Bundler.setup
 
 require 'pathname'
-require 'openssl'
 require 'adventure_rl'
 
 ROOT = Pathname.new(__FILE__).realpath.dirname

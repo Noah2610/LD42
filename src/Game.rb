@@ -1,8 +1,4 @@
 class Game < AdventureRL::Window
-  DIGEST = {
-    MD5: OpenSSL::Digest.new('MD5')
-  }
-
   def setup settings
     @settings = settings
     setup_buttons_event_handler
