@@ -24,7 +24,13 @@ class Level < AdventureRL::Layer
     #puts "LAST: #{last_section.get_id}"  if (last_section)
     #puts "LOAD: #{new_section.get_id}"
     #puts "EQUAL: #{new_section == last_section}"
-    new_section.set_position((last_section || self).get_corner(:right, :top))  # NOTE: Adjust if Sections should move into different direction
+    # NOTE: Adjust if Sections should move into different direction
+    if (last_section)
+      position = last_section.get_corner :right, :top
+    else
+      position = get_corner :left, :top
+    end
+    new_section.set_position position
     add new_section, new_section.get_id
     #end
 
@@ -71,7 +77,7 @@ class Level < AdventureRL::Layer
           ).merge(
             level:    self,
             filename: basename,
-            position: get_corner(:right, :top)
+            position: get_corner(:left, :top)
           )
         )
         if (@config.get(:final_section).sub(/\.json\z/i,'') == basename.sub(/\.json\z/i, ''))

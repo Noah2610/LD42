@@ -77,11 +77,12 @@ block:
   solid_tag:                  :block
   solid_tag_collides_with:
     - :player
-    - :block_stuck
 
 safe_block:
   files:     'safe_block.png'
   intervals: 0.5
+  solid_tag_collides_with: :player
+  z_index: 0
 
 unsafe_block:
   files:
@@ -90,6 +91,10 @@ unsafe_block:
     - 'star/star2.png'
     - 'star/star1.png'
   intervals: 0.5
+  solid_tag_collides_with:
+    - :player
+    - :block_stuck
+  z_index: 1
 
 level:
   auto_update:        false

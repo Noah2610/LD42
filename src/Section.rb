@@ -65,15 +65,18 @@ class Section < AdventureRL::Layer
 
     def check_block_collisions
       get_objects.each do |object|
-        next  unless (block_moving?(object))
-        # NOTE: Adjust for making Sections move into a different direction.
-        object.make_stuck  if (object.get_real_side(:left) <= @level.get_real_side(:left))
+        if    (stuckable_block?(object))
+          # NOTE: Adjust for making Sections move into a different direction.
+          object.make_stuck     if (object.get_real_side(:left) <= @level.get_real_side(:left))
+        elsif (object.is_a?(Blocks::Block))
+          remove_object object  if (object.get_real_side(:right) <= @level.get_real_side(:left))
+        end
       end
     end
 
-    def block_moving? object
+    def stuckable_block? object
       return (
-        object.is_a?(Blocks::Block) &&
+        object.is_a?(Blocks::Unsafe) &&
         !object.is_static?
       )
     end
