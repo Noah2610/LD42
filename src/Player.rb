@@ -17,6 +17,10 @@ class Player < AdventureRL::Animation
     @has_jumped = false
   end
 
+  def get_deltatime
+    return @velocity_deltatime
+  end
+
   def button_down btnid
     @buttons_event_handler.button_down btnid
   end

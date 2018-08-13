@@ -3,16 +3,39 @@ class Level < AdventureRL::Layer
   CONFIG_FILE_NAME = 'level.json'
   ACTIVE_SECTIONS_AMOUNT = 2
 
-  def setup settings = {}
-    load_data_from_directory settings.get(:directory)
+  def setup
+    setup_buttons_event_handler
+    load_data_from_directory @settings.get(:directory)
     @last_loaded_section_index = -1
     @timer = AdventureRL::TimingHandler.new
     add @timer
+    @is_playing = false
   end
 
   def play
     add_next_section
     set_interval
+    @is_playing = true
+    get_object(:player).get_deltatime.reset
+  end
+
+  def continue
+    @is_playing = true
+    @timer.continue
+    get_object(:player).get_deltatime.reset
+  end
+
+  def pause
+    @is_playing = false
+    @timer.pause
+  end
+
+  def is_playing?
+    return !!@is_playing
+  end
+
+  def is_paused?
+    return !is_playing?
   end
 
   def add_next_section
@@ -51,18 +74,41 @@ class Level < AdventureRL::Layer
     end
   end
 
+  def on_button_down btn
+    case btn
+    when :pause
+      GAME.pause_level
+    end
+  end
+
   def button_down btnid
+    return  if (is_paused?)
+    @buttons_event_handler.button_down btnid
     player = get_object :player
     return  unless (player)
     player.button_down btnid
   end
   def button_up btnid
+    return  if (is_paused?)
+    @buttons_event_handler.button_up btnid
     player = get_object :player
     return  unless (player)
     player.button_up btnid
   end
 
+  def update
+    return  if (is_paused?)
+    super
+  end
+
   private
+
+    def setup_buttons_event_handler
+      settings = @settings.get :buttons_event_handler
+      @buttons_event_handler = AdventureRL::EventHandlers::Buttons.new settings
+      @buttons_event_handler.subscribe self
+      add @buttons_event_handler
+    end
 
     def load_data_from_directory dir
       directory = Pathname.new dir

@@ -1,5 +1,5 @@
 module Buttons
-  class PauseContinue < AdventureRL::Button
+  class PauseRetry < AdventureRL::Button
     def setup
       set_position(
         (AdventureRL::Window.get_window.get_side(:right)  * @settings.get(:x)),
@@ -10,7 +10,7 @@ module Buttons
 
     def click
       get_menu.deactivate
-      GAME.continue_level
+      GAME.reset_level
     end
   end
 end

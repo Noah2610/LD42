@@ -18,7 +18,7 @@ player:
   files:
     - 'player.png'
   intervals:                  0.25
-  z_index:                    10
+  z_index:                    5
   precision_over_performance: :high
   solid_tag:                  :player
   solid_tag_collides_with:
@@ -105,6 +105,12 @@ level:
   origin:
     x: :left
     y: :top
+  buttons_event_handler:
+    auto_update: false
+    pressable_buttons:
+      pause:
+        - p
+        - escape
 
 section:
   auto_update:        false
@@ -151,16 +157,102 @@ menu_buttons:
     origin:
       x: :left
       y: :center
+    z_index: 10
 
 main_menu:
-  active: true
-  mouse_buttons_event_handler:
-    only_mouse_buttons: false
+  z_index:     10
+  active:      true
   auto_update: true
+  mouse_buttons_event_handler:
+    only_mouse_buttons: true
+    auto_update: false
+  buttons_event_handler:
+    auto_update: false
+    pressable_buttons:
+      start:
+        - return
+        - space
+      quit:
+        - escape
+        - q
   start:
+    text: 'Start Game'
     y: 0.4
   level_select:
+    text: 'Select Level'
     y: 0.6
   quit:
+    text: 'Quit'
     y: 0.8
+  title_image:
+    file: 'mainmenu_title.png'
+    x: 0.05
+    y: 0.1
+    size:
+      width:  512
+      height: 64
+    origin:
+      x: :left
+      y: :top
+  credits_image:
+    file: 'mainmenu_credits.png'
+    x: 0.8
+    y: 0.8
+    size:
+      width:  256
+      height: 128
+    origin:
+      x: :right
+      y: :bottom
+
+pause_menu:
+  z_index:     10
+  active:      false
+  auto_update: true
+  mouse_buttons_event_handler:
+    only_mouse_buttons: true
+    auto_update: false
+  buttons_event_handler:
+    auto_update: false
+    pressable_buttons:
+      continue:
+        - p
+        - return
+        - space
+      retry:
+        - r
+      to_main:
+        - q
+        - escape
+  continue:
+    text: 'Continue'
+    x: 0.5
+    y: 0.5
+    origin:
+      x: :center
+      y: :center
+  retry:
+    text: 'Retry'
+    x: 0.5
+    y: 0.6
+    origin:
+      x: :center
+      y: :center
+  to_main:
+    text: 'To Main Menu'
+    x: 0.5
+    y: 0.7
+    origin:
+      x: :center
+      y: :center
+  title_image:
+    file: 'mainmenu_title.png'
+    x: 0.5
+    y: 0.25
+    size:
+      width:  512
+      height: 64
+    origin:
+      x: :center
+      y: :center
 ...
