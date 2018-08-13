@@ -51,6 +51,17 @@ class Level < AdventureRL::Layer
     end
   end
 
+  def button_down btnid
+    player = get_object :player
+    return  unless (player)
+    player.button_down btnid
+  end
+  def button_up btnid
+    player = get_object :player
+    return  unless (player)
+    player.button_up btnid
+  end
+
   private
 
     def load_data_from_directory dir

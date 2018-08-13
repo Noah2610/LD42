@@ -5,7 +5,7 @@ has_solids_manager: false
 size:
   width:  960
   height: 540
-buttons:
+buttons_event_handler:
   auto_update: true
   pressable_buttons:
     quit:
@@ -33,7 +33,7 @@ player:
   origin:
     x: :center
     y: :center
-  buttons:
+  buttons_event_handler:
     auto_update: false
     pressable_buttons:
       test:
@@ -121,4 +121,46 @@ section:
   origin:
     x: :left
     y: :top
+
+menu_buttons:
+    text:       ''
+    font_size:  24
+    font_name:  'MonoSpace'
+    font_color: 0xff_ffffff
+    text_alignment:
+      x: :left
+      y: :center
+    border_padding:
+      x: 16
+      y: 8
+    border_color: 0xff_666666
+    border_size:
+      width:  4
+      height: 4
+    background_color:  0xff_222222
+    active_color:      0xff_cc8822
+    hover_colow:       0xff_888888
+    pressable:         false
+    click_on_mouse_up: true
+    position:
+      x: 64
+      y: 0
+    size:
+      width:  256
+      height: 64
+    origin:
+      x: :left
+      y: :center
+
+main_menu:
+  active: true
+  mouse_buttons_event_handler:
+    only_mouse_buttons: false
+  auto_update: true
+  start:
+    y: 0.4
+  level_select:
+    y: 0.6
+  quit:
+    y: 0.8
 ...

@@ -4,7 +4,7 @@ class Player < AdventureRL::Animation
   include AdventureRL::Modifiers::Gravity
 
   def setup settings
-    setup_buttons_event_handler settings.get(:buttons)
+    setup_buttons_event_handler
 
     @speed = settings.get(:speed)
     @jump_standing_on_block_padding = settings.get(:jump_standing_on_block_padding)
@@ -22,10 +22,6 @@ class Player < AdventureRL::Animation
   end
   def button_up btnid
     @buttons_event_handler.button_up btnid
-  end
-
-  def on_button_down btn
-    #jump  if (btn == :jump)
   end
 
   def on_button_up btn
@@ -69,8 +65,8 @@ class Player < AdventureRL::Animation
 
   private
 
-    def setup_buttons_event_handler settings
-      @buttons_event_handler = AdventureRL::EventHandlers::Buttons.new settings
+    def setup_buttons_event_handler
+      @buttons_event_handler = AdventureRL::EventHandlers::Buttons.new @settings.get(:buttons_event_handler)
       @buttons_event_handler.subscribe self
     end
 
