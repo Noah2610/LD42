@@ -10,10 +10,7 @@ class Game < AdventureRL::Window
     setup_level_manager
     # @menu.activate  # NOTE: We activate it by default in settings.yml
 
-    @level_names = [
-      'dev',
-      'art'
-    ]
+    @level_names = @settings.get :level_names
     @current_level_name_index = 0
 
     textbox_settings = @settings.get(:thankyou_textbox)
@@ -40,9 +37,9 @@ class Game < AdventureRL::Window
     @timer = AdventureRL::TimingHandler.new
 
     # TODO
-    @timer.every seconds: 0.5 do
-      puts Gosu.fps
-    end
+    #@timer.every seconds: 0.5 do
+    #  puts Gosu.fps
+    #end
     add @timer
   end
 
@@ -126,9 +123,18 @@ class Game < AdventureRL::Window
     close
   end
 
-  # TODO: Cleanup, Menus::Main handles :quit button, Game doesn't use a EventHandlers::Buttons anymore.
   def on_button_down btn
-    close  if (btn == :quit)
+    puts btn
+    toggle_mute  if (btn == :toggle_music)
+  end
+
+  def toggle_mute
+    return  unless (@song)
+    if (@song.playing?)
+      @song.stop
+    else
+      @song.play
+    end
   end
 
   def button_down btnid
@@ -151,8 +157,8 @@ class Game < AdventureRL::Window
   private
 
     def setup_buttons_event_handler
-      #@buttons_event_handler = AdventureRL::EventHandlers::Buttons.new @settings.get(:buttons_event_handler)
-      #@buttons_event_handler.subscribe self
+      @buttons_event_handler = AdventureRL::EventHandlers::Buttons.new @settings.get(:buttons_event_handler)
+      @buttons_event_handler.subscribe self
     end
 
     def setup_level_manager

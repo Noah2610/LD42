@@ -1,7 +1,7 @@
 PATH
   remote: ../AdventureRL
   specs:
-    adventure_rl (0.0.0)
+    adventure_rl (0.0.1.pre.ld42)
       gosu (~> 0.13.3)
 
 GEM

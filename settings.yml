@@ -8,9 +8,8 @@ size:
 buttons_event_handler:
   auto_update: true
   pressable_buttons:
-    quit:
-      - 'q'
-      - 'escape'
+    toggle_music:
+      - m
 background_color: 0xff_ffffff
 background_z_index: -10
 background_image:
@@ -19,6 +18,9 @@ background_image:
       x: :left
       y: :top
     z_index: -5
+level_names:
+  - 'dev'
+  - 'art'
 song_file: 'song.wav'
 
 player:
