@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+# NOTE: Comment these 2 following lines out when building with Ocra.
 require 'bundler'
 Bundler.setup
 

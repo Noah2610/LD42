@@ -2,10 +2,18 @@
   "name"          : "One",
   "section_count" : 0,
   "section_order" : "alphanumerical",
-  "final_section" : "4.json",
+  "final_section" : "3.json",
+  "move_speed": {
+    "x": 6,
+    "y": 0
+  },
+  "move_direction": {
+    "x": -1,
+    "y": 0
+  },
   "section": {
     "move_speed": {
-      "x": 6,
+      "x": 7,
       "y": 0
     },
     "move_direction": {

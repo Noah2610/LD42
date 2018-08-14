@@ -10,6 +10,7 @@ buttons_event_handler:
   pressable_buttons:
     toggle_music:
       - m
+      - button_4
 background_color: 0xff_ffffff
 background_z_index: -10
 background_image:
@@ -20,9 +21,16 @@ background_image:
     z_index: -5
 level_names:
   - 'one'
+  - 'one-two'
+  - 'post'
+  - 'post-two'
+  - 'post-three'
 song_file: 'song.wav'
 
 player:
+  position:
+    x: 16
+    y: 412
   animations:
     idle:
       files:
@@ -41,7 +49,7 @@ player:
         - 'player/jumping.png'
       intervals: 0.1
   files: 'player/idle.png'
-  intervals:                  1
+  intervals:                  0.1
   z_index:                    5
   precision_over_performance: :high
   solid_tag:                  :player
@@ -73,15 +81,19 @@ player:
         - space
         - up
         - k
+        - button_0
+        - button_2
+        - button_9
+        - button_10
   max_velocity:
-    x: 300
+    x: 400
   velocity_decay:
-    x: 750
+    x: 800
   base_velocity:
-    x: 100
+    x: 75
     y: 0
   speed:
-    x: 700  # Uses Deltatime
+    x: 650  # Uses Deltatime
     y: 250  # Does NOT use Deltatime
   quick_turn_around: true
   gravity_force: 1100
@@ -107,9 +119,9 @@ safe_block:
 
 unsafe_block:
   files:
-    - 'stars/star_1/star_1.1.png'
-    - 'stars/star_1/star_1.2.png'
-    - 'stars/star_1/star_1.3.png'
+    - 'stars/star_4/star_4.1.png'
+    - 'stars/star_4/star_4.2.png'
+    - 'stars/star_4/star_4.3.png'
   intervals: 0.6
   solid_tag_collides_with:
     - :player
@@ -131,6 +143,8 @@ level:
       pause:
         - p
         - escape
+        - button_6
+        - button_1
 
 section:
   auto_update:        false
@@ -199,9 +213,13 @@ main_menu:
       start:
         - return
         - space
+        - button_6
+        - button_0
+        - button_2
       quit:
         - escape
         - q
+        - button_1
   start:
     text: 'Start Game'
     y: 0.4
@@ -247,11 +265,15 @@ pause_menu:
         - p
         - return
         - space
+        - button_6
+        - button_0
       retry:
         - r
+        - button_2
       to_main:
         - q
         - escape
+        - button_1
   continue:
     text: 'Continue'
     x: 0.5
@@ -299,9 +321,12 @@ death_menu:
         - r
         - return
         - space
+        - button_0
+        - button_6
       to_main:
         - q
         - escape
+        - button_1
   retry:
     text: 'Retry'
     x: 0.5
@@ -342,9 +367,12 @@ win_menu:
         - return
         - space
         - n
+        - button_0
+        - button_6
       to_main:
         - q
         - escape
+        - button_1
   next:
     text: 'Next Level'
     x: 0.5
