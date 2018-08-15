@@ -156,7 +156,7 @@ section:
     y:  0
   # move_speed doesn't use Deltatime
   move_speed:
-    x: 5
+    x: 10
     y: 0
   image:
     file: 'bg/bg_1.png'

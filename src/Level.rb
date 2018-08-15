@@ -121,7 +121,7 @@ class Level < AdventureRL::Layer
           ).merge(
             AdventureRL::Settings.new(file)
           ).merge(
-            @config.get(:section)
+            @config.get(:section) || {}
           ).merge(
             level:    self,
             filename: basename,

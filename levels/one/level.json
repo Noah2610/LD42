@@ -2,15 +2,5 @@
   "name"          : "One",
   "section_count" : 0,
   "section_order" : "alphanumerical",
-  "final_section" : "4.json",
-  "section": {
-    "move_speed": {
-      "x": 6,
-      "y": 0
-    },
-    "move_direction": {
-      "x": -1,
-      "y": 0
-    }
-  }
+  "final_section" : "4.json"
 }
